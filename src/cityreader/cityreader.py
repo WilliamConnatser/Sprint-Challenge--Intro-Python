@@ -33,9 +33,6 @@ def cityreader(cities=[]):
     with open('cities.csv') as csv_file:
       csv_reader = csv.reader(csv_file, delimiter=',')
       line_count = 0
-      lat_index = None
-      lon_index = None
-      name_index = None
       for row in csv_reader:
           if line_count == 0:
               lat_index = row.index("lat")
@@ -43,9 +40,8 @@ def cityreader(cities=[]):
               name_index = row.index("city")
               line_count += 1
           else:
-              cities.append(City(row[name_index],row[lat_index],row[lon_index]))
+              cities.append(City(row[name_index],float(row[lat_index]),float(row[lon_index])))
               line_count += 1
-    print(f'Processed {line_count} lines.')
     
     return cities
 
